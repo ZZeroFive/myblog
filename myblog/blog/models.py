@@ -18,7 +18,6 @@ class Category(models.Model):
     def __str__(self):
         return '{}'.format(self.name)
 
-
     class Meta:
         verbose_name = verbose_name_plural = '分类'
 

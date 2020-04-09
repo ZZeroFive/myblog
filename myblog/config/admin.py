@@ -2,9 +2,10 @@ from django.contrib import admin
 
 from config.models import Link
 from config.models import SiderBar
+from myblog.cus_site import custom_site
 
 
-@admin.register(Link)
+@admin.register(Link, site = custom_site)
 class LinkAdmin(admin.ModelAdmin):
     list_display = (
         'title', 'href', 'status',
@@ -24,7 +25,7 @@ class LinkAdmin(admin.ModelAdmin):
         return super(LinkAdmin, self).save_model(request, obj, form, change)
 
 
-@admin.register(SiderBar)
+@admin.register(SiderBar, site = custom_site)
 class SiderBarAdmin(admin.ModelAdmin):
     list_display = (
         'title', 'display_type', 'status',
