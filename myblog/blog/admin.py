@@ -40,9 +40,11 @@ class PostAdmin(admin.ModelAdmin):
     list_filter = ['category', 'tag']
     search_fields = ['title', 'category__name']
     actions_on_top = True
-    actions_on_bottom = True
+
+    #actions_on_bottom = True
     # 编辑页面
-    save_on_top = True
+    #save_on_top = True
+
     fields = (
         ('category', 'title'),
         'desc','status','content','tag'

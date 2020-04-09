@@ -1,3 +1,21 @@
 from django.contrib import admin
+from comment.models import Comment
 
-# Register your models here.
+
+@admin.register(Comment)
+class CommentAdmin(admin.ModelAdmin):
+    list_display = (
+        'target', 'nickname', 'href',
+        'email', 'content', 'created_time'
+    )
+    list_display_links = []
+    list_filter = ['status']
+    search_fields = ['nickname', 'email']
+    fields = (
+        'target', 'content',
+        'href','email'
+    )
+
+    def save_model(self, request, obj, form, change):
+        obj.nickname = request.user
+        return super(CommentAdmin, self).save_model(request, obj, form, change)

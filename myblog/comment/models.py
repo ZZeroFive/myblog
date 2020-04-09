@@ -1,7 +1,7 @@
 from django.db import models
 from blog.models import Post
 
-class Link(models.Model):
+class Comment(models.Model):
     STATUS_NORMAL = 1
     STATUS_DELETE = 0
     STATUS_ITEMS = (
@@ -14,7 +14,7 @@ class Link(models.Model):
     href = models.URLField(verbose_name='网站')
     email = models.EmailField(verbose_name='邮箱')
     status = models.PositiveIntegerField(default=STATUS_NORMAL, choices=STATUS_ITEMS, verbose_name='状态')
-    created_time = models.DateTimeField(auto_now_add=True, verbose_name='创建时间')
+    created_time = models.DateTimeField(auto_now_add=True, verbose_name='评论时间')
 
     class Meta:
         verbose_name = verbose_name_plural = '评论'
