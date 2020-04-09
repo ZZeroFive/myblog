@@ -8,32 +8,34 @@ from blog.models import Tag
 from blog.models import Post
 
 from myblog.cus_site import custom_site
+from myblog import BaseAdmin
 
 
 @admin.register(Category, site=custom_site)
-class CategoryAdmin(admin.ModelAdmin):
+class CategoryAdmin(BaseAdmin):
     list_display = ('name', 'status', 'is_nav', 'owner','created_time')
     fields = ('name', 'status', 'is_nav')
 
-    def save_model(self, request, obj, form, change):
-        obj.owner = request.user
-        print('{}'.format(change))
-        return super(CategoryAdmin, self).save_model(request, obj, form, change)
+    # def save_model(self, request, obj, form, change):
+    #     obj.owner = request.user
+    #     print('{}'.format(change))
+    #     return super(CategoryAdmin, self).save_model(request, obj, form, change)
+    #
+    # # 当前登陆用户只查看自己的文章 list页面
+    # def get_queryset(self, request):
+    #     queryset = super(CategoryAdmin, self).get_queryset(request)
+    #     return queryset.filter(owner=request.user)
 
-    # 当前登陆用户只查看自己的文章 list页面
-    def get_queryset(self, request):
-        queryset = super(CategoryAdmin, self).get_queryset(request)
-        return queryset.filter(owner=request.user)
 
 @admin.register(Tag, site=custom_site)
-class TagAdmin(admin.ModelAdmin):
+class TagAdmin(BaseAdmin):
     list_display = ('name', 'status', 'owner', 'created_time')
     fields = ('name', 'status')
 
-    def save_model(self, request, obj, form, change):
-        obj.owner = request.user
-        print('{}'.format(change))
-        return super(TagAdmin, self).save_model(request, obj, form, change)
+    # def save_model(self, request, obj, form, change):
+    #     obj.owner = request.user
+    #     print('{}'.format(change))
+    #     return super(TagAdmin, self).save_model(request, obj, form, change)
 
 
 # 自定义过滤器
@@ -59,7 +61,7 @@ class CatgoryOwnerFIlter(admin.SimpleListFilter):
 
 
 @admin.register(Post, site=custom_site)
-class PostAdmin(admin.ModelAdmin):
+class PostAdmin(BaseAdmin):
     list_display = (
         'title', 'desc', 'content',
         'category', 'operator'
@@ -98,11 +100,11 @@ class PostAdmin(admin.ModelAdmin):
             reverse('cus_admin:blog_post_change', args=(obj.id,))
         )
 
-    def save_model(self, request, obj, form, change):
-        obj.owner = request.user
-        return super(PostAdmin, self).save_model(request, obj, form, change)
-
-    # 当前登陆用户只查看自己的文章
-    def get_queryset(self, request):
-        queryset = super(PostAdmin, self).get_queryset(request)
-        return queryset.filter(owner=request.user)
+    # def save_model(self, request, obj, form, change):
+    #     obj.owner = request.user
+    #     return super(PostAdmin, self).save_model(request, obj, form, change)
+    #
+    # # 当前登陆用户只查看自己的文章
+    # def get_queryset(self, request):
+    #     queryset = super(PostAdmin, self).get_queryset(request)
+    #     return queryset.filter(owner=request.user)

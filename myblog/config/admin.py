@@ -3,10 +3,10 @@ from django.contrib import admin
 from config.models import Link
 from config.models import SiderBar
 from myblog.cus_site import custom_site
-
+from myblog import BaseAdmin
 
 @admin.register(Link, site = custom_site)
-class LinkAdmin(admin.ModelAdmin):
+class LinkAdmin(BaseAdmin):
     list_display = (
         'title', 'href', 'status',
         'weight','owner'
@@ -20,13 +20,13 @@ class LinkAdmin(admin.ModelAdmin):
         'weight'
     )
 
-    def save_model(self, request, obj, form, change):
-        obj.owner = request.user
-        return super(LinkAdmin, self).save_model(request, obj, form, change)
+    # def save_model(self, request, obj, form, change):
+    #     obj.owner = request.user
+    #     return super(LinkAdmin, self).save_model(request, obj, form, change)
 
 
 @admin.register(SiderBar, site = custom_site)
-class SiderBarAdmin(admin.ModelAdmin):
+class SiderBarAdmin(BaseAdmin):
     list_display = (
         'title', 'display_type', 'status',
         'content','owner', 'created_time'
@@ -40,6 +40,6 @@ class SiderBarAdmin(admin.ModelAdmin):
         'content'
     )
 
-    def save_model(self, request, obj, form, change):
-        obj.owner = request.user
-        return super(SiderBarAdmin, self).save_model(request, obj, form, change)
+    # def save_model(self, request, obj, form, change):
+    #     obj.owner = request.user
+    #     return super(SiderBarAdmin, self).save_model(request, obj, form, change)
