@@ -2,7 +2,6 @@ from django.contrib import admin
 from comment.models import Comment
 
 from myblog.cus_site import custom_site
-from myblog import BaseAdmin
 
 @admin.register(Comment, site=custom_site)
 class CommentAdmin(admin.ModelAdmin):

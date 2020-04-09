@@ -8,11 +8,11 @@ from blog.models import Tag
 from blog.models import Post
 
 from myblog.cus_site import custom_site
-from myblog import BaseAdmin
+from myblog.BaseOwnerAdmin import BaseOwnerAdmin
 
 
 @admin.register(Category, site=custom_site)
-class CategoryAdmin(BaseAdmin):
+class CategoryAdmin(BaseOwnerAdmin):
     list_display = ('name', 'status', 'is_nav', 'owner','created_time')
     fields = ('name', 'status', 'is_nav')
 
@@ -28,7 +28,7 @@ class CategoryAdmin(BaseAdmin):
 
 
 @admin.register(Tag, site=custom_site)
-class TagAdmin(BaseAdmin):
+class TagAdmin(BaseOwnerAdmin):
     list_display = ('name', 'status', 'owner', 'created_time')
     fields = ('name', 'status')
 
@@ -61,7 +61,7 @@ class CatgoryOwnerFIlter(admin.SimpleListFilter):
 
 
 @admin.register(Post, site=custom_site)
-class PostAdmin(BaseAdmin):
+class PostAdmin(BaseOwnerAdmin):
     list_display = (
         'title', 'desc', 'content',
         'category', 'operator'

@@ -3,10 +3,10 @@ from django.contrib import admin
 from config.models import Link
 from config.models import SiderBar
 from myblog.cus_site import custom_site
-from myblog import BaseAdmin
+from myblog.BaseOwnerAdmin import BaseOwnerAdmin
 
 @admin.register(Link, site = custom_site)
-class LinkAdmin(BaseAdmin):
+class LinkAdmin(BaseOwnerAdmin):
     list_display = (
         'title', 'href', 'status',
         'weight','owner'
@@ -26,7 +26,7 @@ class LinkAdmin(BaseAdmin):
 
 
 @admin.register(SiderBar, site = custom_site)
-class SiderBarAdmin(BaseAdmin):
+class SiderBarAdmin(BaseOwnerAdmin):
     list_display = (
         'title', 'display_type', 'status',
         'content','owner', 'created_time'
